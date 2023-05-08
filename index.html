@@ -21,7 +21,12 @@
       <main>
         <section class="location">
           <div class="city">Furtwangen im Schwarzwald, DE</div>
+<<<<<<< HEAD
+          <div class="date">
+          </div>
+=======
           <div class="date" id="current-date"></div>
+>>>>>>> d0085f8844274c118c13edc262a4a3cfa6a7afeb
         </section>
 
         <div class="current">
@@ -32,4 +37,9 @@
     </div>
     <script src="index.js"></script>
   </body>
+  <script>
+    var date = new Date();
+    document.getElementsByClassName("date").innerHTML = dateBuilder(date);
+  </script>
 </html>
+
