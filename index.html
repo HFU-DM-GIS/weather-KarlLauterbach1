@@ -20,13 +20,16 @@
       </header>
       <main>
         <section class="location">
-          <div class="city">Furtwangen im Schwarzwald, DE</div>
-<<<<<<< HEAD
+          <div class="city">Furzwangen im Schwarzwald, DE</div>
           <div class="date">
           </div>
-=======
-          <div class="date" id="current-date"></div>
->>>>>>> d0085f8844274c118c13edc262a4a3cfa6a7afeb
+          <div class="button"><button id="refresh"> Refresh </button></div>
+          <div class="saveList"><button id="save">Save into List</button></div>
+          <div class="list">
+            <select id="cityList">
+              <option>Select a saved city</option>
+            </select>
+          </div>
         </section>
 
         <div class="current">
@@ -38,8 +41,8 @@
     <script src="index.js"></script>
   </body>
   <script>
-    var date = new Date();
+    let date = new Date();
     document.getElementsByClassName("date").innerHTML = dateBuilder(date);
+
   </script>
 </html>
-

@@ -14,13 +14,20 @@ searchbox.addEventListener("keypress", setQuery);// Methode addEventListener wir
 //Wenn das Ereignis ausgelöst wird, wird die Funktion setquery aufgerufen.
 // Gesamter Codeauschnitt 11-12 ermöglicht auf HTML-Elemt zuzugreifen, um dann eine Funktion auszuführen, in diesem Fall Taste drücken.
 
-function setQuery(evt) { //Funktion mit dem Parameter evt
-  if (evt.keyCode == 13) { // If- Anweisung, um zu überprüfen ob Benutzer Enter gefrückt hat., wenn dies der Fall isz wird getCoordinates 
-    //ausageführt und der Parameter wird übergeben.
-    getCoordinates(searchbox.value); //Funktion getCoordinates wird aufgerufen und der im Searchbox-HTML Element eingegebene Wert
-    //Wird Übergeben.
-    //--> Code Abschnitt 17-20 Ermöglicht Funktion aufzurufen, wenn der Benutzer die Eingabetaste drückt. 
-    //Sie  ruft dann eine weitere Funktion auf, die den Wert aus der Searchbox-Element verwendet, um Koordinaten für die Suche zu erhalten.
+const button = document.getElementById("refresh");
+button.addEventListener("click", setQuery);
+let buttonClicked = false;
+
+button.onclick = function (){
+  buttonClicked = true
+}
+const save = document.getElementById("save");
+save.addEventListener("click", saveList);
+const list = document.getElementById("cityList");
+function setQuery(evt) {
+  if (evt.keyCode === 13 || buttonClicked === true) {
+    getCoordinates(searchbox.value);
+    buttonClicked = false;
   }
 }
 
@@ -174,4 +181,11 @@ function interpretWeatherCode(code) { //in Objekt weatherCodes definiert, das al
   } else {
     return interpretation; //Falls Interpretation gefunden worden ist, wird diese zurückgegeben 
   }
+}
+
+function saveList(){
+  var opt = document.createElement('option');
+  opt.value = searchbox.value;
+  opt.innerHTML = searchbox.value;
+  list.appendChild(opt);
 }
