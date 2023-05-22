@@ -5,81 +5,90 @@ const api = {
   baseGEO: "https://nominatim.openstreetmap.org/", // base URL for geocoding
 };
 
-let foundLocation = "";
-let foundCountry = "";
+let foundLocation = ""; //leerer String um Ort bzw Standort einzugeben
+let foundCountry = ""; //Leerer String für LAnd
 
-const searchbox = document.querySelector(".search-box");
-searchbox.addEventListener("keypress", setQuery);
+const searchbox = document.querySelector(".search-box"); //Konstante  mit dem namen searchbox, kann somit auf CSS Klasse hinzugefügt werden
+searchbox.addEventListener("keypress", setQuery);// Methode addEventListener wird an Search Element gebunden--> wird ausgelöst wenn der Benutzer 
+// die Taste drückt.
+//Wenn das Ereignis ausgelöst wird, wird die Funktion setquery aufgerufen.
+// Gesamter Codeauschnitt 11-12 ermöglicht auf HTML-Elemt zuzugreifen, um dann eine Funktion auszuführen, in diesem Fall Taste drücken.
 
-function setQuery(evt) {
-  if (evt.keyCode == 13) {
-    getCoordinates(searchbox.value);
+function setQuery(evt) { //Funktion mit dem Parameter evt
+  if (evt.keyCode == 13) { // If- Anweisung, um zu überprüfen ob Benutzer Enter gefrückt hat., wenn dies der Fall isz wird getCoordinates 
+    //ausageführt und der Parameter wird übergeben.
+    getCoordinates(searchbox.value); //Funktion getCoordinates wird aufgerufen und der im Searchbox-HTML Element eingegebene Wert
+    //Wird Übergeben.
+    //--> Code Abschnitt 17-20 Ermöglicht Funktion aufzurufen, wenn der Benutzer die Eingabetaste drückt. 
+    //Sie  ruft dann eine weitere Funktion auf, die den Wert aus der Searchbox-Element verwendet, um Koordinaten für die Suche zu erhalten.
   }
 }
 
-function getResultsOM(coordinates) {
-  fetch(
+function getResultsOM(coordinates) { //als PArameter coodrinates
+  fetch( //fetch sendet eine Anfrage an eine externe API
     `${api.baseOM}forecast?latitude=${coordinates.latitude}&longitude=${coordinates.longitude}&hourly=temperature_2m&current_weather=true`
-  )
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+  ) //hier werden die coordinates Objekte von oben entnommen und in die API eingesetzt
+    .then((response) => { //hier wird geprüft ob Server-Antwort passt und zurückgegeben wird
+      if (!response.ok) { //hier prüft sie ob die Server-Antwort ok ist
+        throw new Error("Network response was not ok"); //Falls dies nicht so ist, wird eine Fehlermeldung angezeigt.
       }
-      return response.json();
+      return response.json();//Hier wird sie andernfalls in JSON Format umgewandelt und in dem nächsten then übergeben
     })
-    .then(displayResults)
-    .catch((error) => {
-      console.error("There was a problem fetching weather data:", error);
+    .then(displayResults) //Funktion dispalyresults wird aufgerufen und übergibt die von der API zurückgegeben Daten als Parameter 
+    .catch((error) => { //Wenn während der Fetch-PRozesses ein Fehler auftritt, wird catch aufgerufen und es kommt eine Fehlermeldung
+      console.error("There was a problem fetching weather data:", error);//Diese Fehlermeldung wird ausgegeben.
     });
 }
 
-function getCoordinates(query) {
-  fetch(`${api.baseGEO}search?q=${query}&format=json`)
-    .then((response) => {
+function getCoordinates(query) { //definiert die Funktion getCoordinates, die ebenfalls eine Suchanfrage an eine externe API sendet um Suchanfrage zu erhalten
+  fetch(`${api.baseGEO}search?q=${query}&format=json`) 
+    .then((response) => { //Response wird zurückgegeben, also die Server-Antwort--> Gleicher Prozess wie oben
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        throw new Error("Network response was not ok");//Falls dies nicht so ist, wird eine Fehlermeldung angezeigt.
       }
-      return response.json();
+      return response.json(); //response wird zurückgegeben , wird aus json Objekt zurückgegeben 
     })
-    .then((data) => {
+    .then((data) => { //GPS-Koordinaten werden aus dem Objekt extrahiert 
       const coordinates = {
-        latitude: data[0].lat,
+        latitude: data[0].lat,//Daten werden mit den Eigenschaften latitude und longitude gespeichert, das aks Rückgabe der Koordinaten dient
         longitude: data[0].lon,
       };
       const fullLocation = data[0].display_name;
-      const subLocationStrings = splitStringByComma(fullLocation);
-      foundLocation = subLocationStrings[0];
-      foundCountry = subLocationStrings[subLocationStrings.length - 1];
+      const subLocationStrings = splitStringByComma(fullLocation); //wird auf den Ortsnamen angewendet um eine Liste von Strings zu erstellen.
+      foundLocation = subLocationStrings[0]; //Erster Teil des Ortsnamen wird der Variable foundlocation zugewiesen 
+      foundCountry = subLocationStrings[subLocationStrings.length - 1]; //Das Land wird der Variable foundcountry zugewiesen
       console.log(data);
-      getResultsOM(coordinates);
+      getResultsOM(coordinates); //Externe API wird wieder für Wetterdaten aufgerufen --> Wetterdaten werden abgerufen.
     })
     .catch((error) => {
       console.error("There was a problem fetching GPS coordinates:", error);
     });
+    //dieser Abschnitt des Codes 43-64 bezieht sich auf das Abrufen des Wetters an einem bestimmten Ort.
 }
 
-function displayResults(weather) {
-  console.log(weather);
-  let city = document.querySelector(".location .city");
+function displayResults(weather) { //displayResults wird aufgerufen, wenn die Wetterdaten erfolgreich von der OpenWhatherAPI abgerufen worden ist
+  console.log(weather);  //Wetter wird angezeigt in der Konsole          //HTML Elemente werden aktualisiert, um erhaltene Wettdertane zu aktualisieren.
+  let city = document.querySelector(".location .city"); //HTML-Element wird augewählt mit Klassen location und city und speichert es in der Vaeiable City
   city.innerText = `${foundLocation}, ${foundCountry}`;
 
-  let now = new Date();
-  let date = document.querySelector(".location .date");
-  date.innerText = dateBuilder(now);
+  let now = new Date(); //Es wird ein neues Date-Objekt erstellt mmit neuem Datum und wird gespeichert in der Variable now
+  let date = document.querySelector(".location .date"); //Tag und Ort werden von dem HTML Element ausgewählt und gespeichert unter der Variable date
+  date.innerText = dateBuilder(now); //Die Funktion setzt den Text des ausgewählten HTML-Elements auf das Datum, das von der Funktion dateBuilder unter Verwendung des now-Objekts erstellt wurde.
 
-  let temp = document.querySelector(".current .temp");
+  let temp = document.querySelector(".current .temp"); // es wird die Klasse current und der Tag temp aus dem HTML-elemt ausgewählt und gespeichert
   temp.innerHTML = `${Math.round(
-    weather.current_weather.temperature/0.5
+    weather.current_weather.temperature/0.5 //HTML-Inhalt aus dem Element wird auf gerundete Temperatur mit Celcius gekennzeichnet.
   )*0.5}<span>°C</span>`;
   
-  let weather_el = document.querySelector(".current .weather");
+  let weather_el = document.querySelector(".current .weather"); //Klasee current und Tag wheater werden wieder ausgewählt und gespeichert
   weather_el.innerText = interpretWeatherCode(
-    weather.current_weather.weathercode
+    weather.current_weather.weathercode //<--Code ist darunter  gespeichert , wird interpretiert mithilfe der obigen Funktion.
   );
 }
+//Dieser Code-abschnitt 69-87 nimmt das Wetterobjekt das von der API erhalten worden ist, entpackt es und zeigt es auf der Webseite an.
 
-function dateBuilder(d) {
-  let months = [
+function dateBuilder(d) { //Datum wird als Parameter erwartet
+  let months = [ //Monate werden aufgelistet um datum zu erstellen
     "January",
     "February",
     "March",
@@ -93,7 +102,7 @@ function dateBuilder(d) {
     "November",
     "December",
   ];
-  let days = [
+  let days = [ //Tage werden aufgelistet, um Datum zu erstellen 
     "Sunday",
     "Monday",
     "Tuesday",
@@ -108,11 +117,11 @@ function dateBuilder(d) {
   let month = months[d.getMonth()];
   let year = d.getFullYear();
 
-  return `${day} ${date} ${month} ${year}`;
+  return `${day} ${date} ${month} ${year}`; //Datum wird als String wiedergegeben 
 }
 
-function splitStringByComma(str) {
-  // Remove any leading/trailing whitespace from the string
+function splitStringByComma(str) { //String als Parameter 
+  // Remove any leading/trailing whitespace from the string --> Eingabestring wird von Leerzeichen befreit
   str = str.trim();
 
   // Split the string into an array using commas as the delimiter
@@ -121,12 +130,12 @@ function splitStringByComma(str) {
   // Trim any leading/trailing whitespace from each substring
   const trimmedSubstrings = substrings.map((substring) => substring.trim());
 
-  return trimmedSubstrings;
+  return trimmedSubstrings; //Der Array von Strings mit den bereinigten Unterzeichenketten wird zurückgegeben.
 }
 
-function interpretWeatherCode(code) {
+function interpretWeatherCode(code) { //in Objekt weatherCodes definiert, das als Schlüssel die Wettercodes und als Werte die dazugehörigen Interpretationen enthält.
   // converting the weather codes from https://open-meteo.com/en/docs
-  const weatherCodes = {
+  const weatherCodes = { //mögliche Interpretationen
     0: "Clear",
     1: "Mainly clear",
     2: "Partly cloudy",
@@ -160,8 +169,9 @@ function interpretWeatherCode(code) {
   const interpretation = weatherCodes[code];
 
   if (interpretation === undefined) {
-    return "Unknown";
+    return "Unknown"; //Falls keine passende Interpretation gefunden wurde, 
+    //wird "Unknown" zurückgegeben, ansonsten wird die ermittelte Interpretation zurückgegeben.
   } else {
-    return interpretation;
+    return interpretation; //Falls Interpretation gefunden worden ist, wird diese zurückgegeben 
   }
 }
