@@ -6,7 +6,7 @@ const api = {
 };
 
 let foundLocation = ""; //leerer String um Ort bzw Standort einzugeben
-let foundCountry = ""; //Leerer String für LAnd
+let foundCountry = ""; //Leerer String für Land
 
 const searchbox = document.querySelector(".search-box"); //Konstante  mit dem namen searchbox, kann somit auf CSS Klasse hinzugefügt werden
 searchbox.addEventListener("keypress", setQuery);// Methode addEventListener wird an Search Element gebunden--> wird ausgelöst wenn der Benutzer 
