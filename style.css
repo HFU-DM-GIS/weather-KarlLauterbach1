@@ -91,3 +91,22 @@ body {
   #date{
     color: #eeeeee
   }
+  button {
+    border: none;
+    border-radius: 20px; /* Damit der Rand oval wird */
+    padding: 10px 20px;
+    background-color: green;
+    color: white;
+    font-weight: bold;
+  }
+  
+  /* Stil für den grünen Rand bei Klick */
+  button:active {
+    outline: none;
+    box-shadow: 0 0 0 3px green; /* 3px breiter grüner Rand */
+  }
+  
+  /* Stil für die grüne fette Schrift */
+  button {
+    font-weight: bold;
+  }
