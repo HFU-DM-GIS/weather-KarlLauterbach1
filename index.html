@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Weather App</title>
+    <title>Weather-licious</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -19,14 +19,13 @@
       </header>
       <main>
         <section class="location">
-          <div class="city">Furzwangen im Schwarzwald, DE</div>
-          <div class="date">
-          </div>
-          <div class="button"><button id="refresh"> Refresh </button></div>
-          <div class="saveList"><button id="save">Save into List</button></div>
+          <div class="city">Jetzt Stadt auswählen!</div>
+          <div class="date"></div>
+          <div class="button"><button id="refresh">Refresh</button></div>
+          <div class="saveList"><button id="save">Ort speichern</button></div>
           <div class="list">
             <select id="cityList">
-              <option>Select a saved city</option>
+              <option>Gespeicherten Ort auswählen</option>
             </select>
           </div>
         </section>
@@ -38,10 +37,9 @@
       </main>
     </div>
     <script src="index.js"></script>
+    <script>
+      let date = new Date();
+      document.querySelector(".date").innerHTML = dateBuilder(date);
+    </script>
   </body>
-  <script>
-    let date = new Date();
-    document.getElementsByClassName("date").innerHTML = dateBuilder(date);
-
-  </script>
 </html>
