@@ -96,7 +96,7 @@ body {
     border-radius: 20px; /* Damit der Rand oval wird */
     padding: 10px 20px;
     background-color: rgb(167, 196, 167);
-    color: white;
+    color: rgb(2, 54, 12);
     font-weight: bold;
   }
   
@@ -114,7 +114,7 @@ body {
     border: none;
     border-radius: 20px; /* Damit der Rand oval wird */
     padding: 10px 20px;
-    background-color: green;
+    background-color: rgb(129, 188, 129);
     color: white;
     font-weight: bold;
   }
