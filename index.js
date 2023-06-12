@@ -23,11 +23,9 @@ button.onclick = function () {
 };
 
 const save = document.getElementById("save");
-save.addEventListener("click", saveLocation);
+save.addEventListener("click", saveList);
 
 const list = document.getElementById("cityList");
-loadSavedLocations();
-
 function setQuery(evt) {
   if (evt.keyCode === 13 || buttonClicked === true) {
     getCoordinates(searchbox.value);
@@ -35,32 +33,29 @@ function setQuery(evt) {
   }
 }
 
-function saveLocation() {
-  const location = searchbox.value;
-  saveLocationToLocalStorage(location);
-  appendLocationToList(location);
-}
-
-function saveLocationToLocalStorage(location) {
-  const savedLocations = getSavedLocationsFromLocalStorage();
+function saveLocation(location) {
+  const savedLocations =
+    JSON.parse(localStorage.getItem("savedLocations")) || [];
   savedLocations.push(location);
   localStorage.setItem("savedLocations", JSON.stringify(savedLocations));
 }
 
-function getSavedLocationsFromLocalStorage() {
-  const savedLocations = JSON.parse(localStorage.getItem("savedLocations")) || [];
-  return savedLocations;
-}
-
 function loadSavedLocations() {
-  const savedLocations = getSavedLocationsFromLocalStorage();
+  const savedLocations =
+    JSON.parse(localStorage.getItem("savedLocations")) || [];
   for (let i = 0; i < savedLocations.length; i++) {
-    const location = savedLocations[i];
-    appendLocationToList(location);
+    const opt = document.createElement("option");
+    opt.value = savedLocations[i];
+    opt.innerHTML = savedLocations[i];
+    list.appendChild(opt);
   }
 }
 
-function appendLocationToList(location) {
+loadSavedLocations();
+
+function saveList() {
+  const location = searchbox.value;
+  saveLocation(location);
   const opt = document.createElement("option");
   opt.value = location;
   opt.innerHTML = location;
@@ -68,32 +63,20 @@ function appendLocationToList(location) {
 }
 
 function getResultsOM(coordinates) {
+  //als PArameter coodrinates
   fetch(
+    //fetch sendet eine Anfrage an eine externe API
     `${api.baseOM}forecast?latitude=${coordinates.latitude}&longitude=${coordinates.longitude}&hourly=temperature_2m&current_weather=true`
   )
+    //hier werden die coordinates Objekte von oben entnommen und in die API eingesetzt
     .then((response) => {
+      //hier wird geprüft ob Server-Antwort passt und zurückgegeben wird
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        //hier prüft sie ob die Server-Antwort ok ist
+        throw new Error("Network response was not ok"); //Falls dies nicht so ist, wird eine Fehlermeldung angezeigt.
       }
-      return response.json();
+      return response.json(); //Hier wird sie andernfalls in JSON Format umgewandelt und in dem nächsten then übergeben
     })
-    .then(displayResults)
+    .then(displayResults) //Funktion dispalyresults wird aufgerufen und übergibt die von der API zurückgegeben Daten als Parameter
     .catch((error) => {
-      console.error("There was a problem fetching weather data:", error);
-    });
-}
-
-function getCoordinates(query) {
-  fetch(`${api.baseGEO}search?q=${query}&format=json`)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      const coordinates = {
-        latitude: data[0].lat,
-        longitude: data[0].lon,
-      };
-      const fullLocation = data[
+      //Wenn während der Fetch
