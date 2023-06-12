@@ -124,7 +124,7 @@ body {
     outline: none;
     box-shadow: 0 0 0 3px green; /* 3px breiter grüner Rand */
   }
-  #cityList {
+  #saveList {
     border: none;
     border-radius: 20px; /* Damit der Rand oval wird */
     padding: 10px;
@@ -134,6 +134,6 @@ body {
   }
   
   /* Stil für die Optionen im Dropdown-Menü */
-  #cityList option {
+  #saveList option {
     font-weight: bold;
   }
