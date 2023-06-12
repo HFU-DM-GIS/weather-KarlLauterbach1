@@ -98,6 +98,7 @@ body {
     background-color: rgb(167, 196, 167);
     color: rgb(2, 54, 12);
     font-weight: bold;
+    margin-right: 10px; /* Fügt einen 10px Abstand zwischen den Buttons hinzu */
   }
   
   /* Stil für den grünen Rand bei Klick */
@@ -111,6 +112,7 @@ body {
     font-weight: bold;
   }
     
+
   
   #save {
     border: none;
@@ -119,7 +121,7 @@ body {
     background-color: rgb(167, 196, 167);
     color: rgb(2, 54, 12);
     font-weight: bold;
-    margin-right: 20px; /* Fügt einen 10px Abstand zwischen den Buttons hinzu */
+    
   }
   
   /* Stil für den grünen Rand bei Klick */
@@ -134,7 +136,7 @@ body {
     background-color: rgb(167, 196, 167);
     color: rgb(2, 54, 12);
     font-weight: bold;
-    margin-right: 20px; /* Fügt einen 10px Abstand zwischen den Buttons hinzu */
+   
   }
   
   /* Stil für die Optionen im Dropdown-Menü */
