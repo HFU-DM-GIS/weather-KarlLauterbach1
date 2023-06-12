@@ -111,7 +111,7 @@ body {
     font-weight: bold;
   }
   .button {
-    margin-right: 10px; /* Fügt einen 10px Abstand zwischen den Buttons hinzu */
+    margin-right: 20px; /* Fügt einen 10px Abstand zwischen den Buttons hinzu */
   }
   #save {
     border: none;
