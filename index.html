@@ -19,14 +19,13 @@
       </header>
       <main>
         <section class="location">
-          <div class="city">Jetzt Stadt auswählen</div>
-          <div class="date">
-          </div>
-          <div class="button"><button id="refresh"> Aktualisieren </button></div>
-          <div class="saveList"><button id="save">Ort speichern</button></div>
+          <div class="city">Furzwangen im Schwarzwald, DE</div>
+          <div class="date"></div>
+          <div class="button"><button id="refresh">Refresh</button></div>
+          <div class="saveList"><button id="save">Save into List</button></div>
           <div class="list">
             <select id="cityList">
-              <option>Gespeicherten Ort auswählen</option>
+              <option>Select a saved city</option>
             </select>
           </div>
         </section>
@@ -38,10 +37,9 @@
       </main>
     </div>
     <script src="index.js"></script>
+    <script>
+      let date = new Date();
+      document.querySelector(".date").innerHTML = dateBuilder(date);
+    </script>
   </body>
-  <script>
-    let date = new Date();
-    document.getElementsByClassName("date").innerHTML = dateBuilder(date);
-
-  </script>
 </html>
