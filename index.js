@@ -172,7 +172,47 @@ function interpretWeatherCode(code) { //in Objekt weatherCodes definiert, das al
     96: "⛈️🌨️ Thunderstorm with slight hail",
     99: "⛈️🌨️ Thunderstorm with heavy hail",
   };
-  
+  const request = require('request');
+const cheerio = require('cheerio');
+
+// Function to fetch clothing offers based on weather condition
+function fetchClothingOffers(weatherCondition) {
+  let searchQuery = '';
+
+  // Determine the search query based on the weather condition
+  if (weatherCondition === 'Sunny') {
+    searchQuery = 'lightweight t-shirt';
+  } else if (weatherCondition === 'Rainy') {
+    searchQuery = 'waterproof jacket';
+  } else if (weatherCondition === 'Cold') {
+    searchQuery = 'insulated parka';
+  }
+
+  const url = `https://www2.hm.com/de_de/index.html/search?q=${searchQuery}`;
+
+  request(url, (error, response, body) => {
+    if (!error && response.statusCode === 200) {
+      const $ = cheerio.load(body);
+
+      const products = [];
+      $('.product-item').each((i, el) => {
+        const product = {};
+        product.image = $(el).find('.product-image img').attr('src');
+        product.url = $(el).find('.product-title a').attr('href');
+        product.price = $(el).find('.product-price').text().trim();
+        products.push(product);
+      });
+      
+      console.log(products);
+      // Here, you can process the fetched clothing offers as per your requirements
+    } else {
+      console.log(error);
+    }
+  });
+}
+
+// Example usage: Fetch clothing offers for a sunny weather condition
+fetchClothingOffers('Sunny');
 
   const interpretation = weatherCodes[code];
 
