@@ -31,6 +31,34 @@ function setQuery(evt) {
   }
 }
 
+function saveLocation(location) {
+  const savedLocations = JSON.parse(localStorage.getItem("savedLocations")) || [];
+  savedLocations.push(location);
+  localStorage.setItem("savedLocations", JSON.stringify(savedLocations));
+}
+
+function loadSavedLocations() {
+  const savedLocations = JSON.parse(localStorage.getItem("savedLocations")) || [];
+  for (let i = 0; i < savedLocations.length; i++) {
+    const opt = document.createElement("option");
+    opt.value = savedLocations[i];
+    opt.innerHTML = savedLocations[i];
+    list.appendChild(opt);
+  }
+}
+
+loadSavedLocations();
+
+function saveList() {
+  const location = searchbox.value;
+  saveLocation(location);
+  const opt = document.createElement("option");
+  opt.value = location;
+  opt.innerHTML = location;
+  list.appendChild(opt);
+}
+
+
 function getResultsOM(coordinates) { //als PArameter coodrinates
   fetch( //fetch sendet eine Anfrage an eine externe API
     `${api.baseOM}forecast?latitude=${coordinates.latitude}&longitude=${coordinates.longitude}&hourly=temperature_2m&current_weather=true`
