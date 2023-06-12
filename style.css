@@ -114,8 +114,8 @@ body {
     border: none;
     border-radius: 20px; /* Damit der Rand oval wird */
     padding: 10px 20px;
-    background-color: rgb(129, 188, 129);
-    color: white;
+    background-color: rgb(167, 196, 167);
+    color: rgb(2, 54, 12);
     font-weight: bold;
   }
   
@@ -123,4 +123,17 @@ body {
   #save:active {
     outline: none;
     box-shadow: 0 0 0 3px green; /* 3px breiter grüner Rand */
+  }
+  #cityList {
+    border: none;
+    border-radius: 20px; /* Damit der Rand oval wird */
+    padding: 10px;
+    background-color: rgb(167, 196, 167);
+    color: rgb(2, 54, 12);
+    font-weight: bold;
+  }
+  
+  /* Stil für die Optionen im Dropdown-Menü */
+  #cityList option {
+    font-weight: bold;
   }
