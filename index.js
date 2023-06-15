@@ -118,27 +118,46 @@ function dateBuilder(d) {
 
  return `${date} ${month} ${year}`;
 }
-
-function interpretWeatherCode(code) {
- // Hier kannst du deine eigene Logik für die Interpretation der Wettercodes implementieren
- // Ich verwende hier nur einige Beispiele
- if (code >= 200 && code <= 232) {
-   return "Thunderstorm";
- } else if (code >= 300 && code <= 321) {
-   return "Drizzle";
- } else if (code >= 500 && code <= 531) {
-   return "Rain";
- } else if (code >= 600 && code <= 622) {
-   return "Snow";
- } else if (code >= 701 && code <= 781) {
-   return "Mist";
- } else if (code === 800) {
-   return "Clear";
- } else if (code >= 801 && code <= 804) {
-   return "Clouds";
- } else {
-   return "Unknown";
+ 
+  function interpretWeatherCode(code) { 
+    const weatherCodes = {
+      0: "☀️ Clear",
+      1: "🌤️ Mainly clear",
+      2: "⛅ Partly cloudy",
+      3: "☁️ Overcast",
+      45: "🌫️ Fog",
+      48: "🌫️ Depositing rime fog",
+      51: "🌧️ Light drizzle",
+      53: "🌧️ Moderate drizzle",
+      55: "🌧️ Dense drizzle",
+      56: "🌧️❄️ Freezing Drizzle: Light intensity",
+      57: "🌧️❄️ Freezing Drizzle: dense intensity",
+      61: "🌧️ Slight rain",
+      63: "🌧️ Moderate rain",
+      65: "🌧️🌧️ Heavy rain",
+      66: "🌧️❄️ Freezing Rain: Light intensity",
+      67: "🌧️❄️ Freezing Rain: Heavy intensity",
+      71: "❄️ Snow fall: Slight intensity",
+      73: "❄️ Snow fall: Moderate intensity",
+      75: "❄️❄️ Snow fall: Heavy intensity",
+      77: "❄️ Snow grains",
+      80: "🌦️ Slight rain showers",
+      81: "🌦️ Moderate rain showers",
+      82: "🌧️⛈️ Violent rain showers",
+      85: "❄️ Slight snow showers",
+      86: "❄️❄️ Heavy snow showers",
+      95: "⛈️ Thunderstorm: Slight or moderate",
+      96: "⛈️🌨️ Thunderstorm with slight hail",
+      99: "⛈️🌨️ Thunderstorm with heavy hail",
  }
+ const interpretation = weatherCodes[code];
+
+  if (interpretation === undefined) {
+    return "Unknown"; //Falls keine passende Interpretation gefunden wurde, 
+    //wird "Unknown" zurückgegeben, ansonsten wird die ermittelte Interpretation zurückgegeben.
+  } else {
+    return interpretation; //Falls Interpretation gefunden worden ist, wird diese zurückgegeben 
+  }
 }
 
 function saveLocation(location) {
@@ -168,4 +187,17 @@ function saveList() {
 
 function splitStringByComma(string) {
  return string.split(",").map((s) => s.trim());
+}
+
+function deleteLocation() {
+  let selectedLocation = list.value;
+  if (selectedLocation !== "Select a saved city") {
+    let savedLocations = JSON.parse(localStorage.getItem("savedLocations"));
+    let index = savedLocations.indexOf(selectedLocation);
+    if (index !== -1) {
+      savedLocations.splice(index, 1);
+      localStorage.setItem("savedLocations", JSON.stringify(savedLocations));
+      list.remove(list.selectedIndex);
+    }
+  }
 }
