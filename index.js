@@ -73,7 +73,7 @@ function getCoordinates(query) {
       foundCountry = subLocationStrings[subLocationStrings.length - 1];
       console.log(data);
       getResultsOM(coordinates);
-      saveLocation(query); // Speichern Sie den ausgewählten Ort im Local Storage
+
     })
     .catch((error) => {
       console.error("There was a problem fetching GPS coordinates:", error);
@@ -170,20 +170,29 @@ function loadSavedLocations() {
  let savedLocations = JSON.parse(localStorage.getItem("savedLocations")) || [];
  savedLocations.forEach((location) => {
    let option = document.createElement("option");
-   option.value = location;
+   option.value = location
+
    option.text = location;
    list.add(option);
  });
 }
 
 function saveList() {
- let selectedLocation = searchbox.value;
- let option = document.createElement("option");
- option.value = selectedLocation;
- option.text = selectedLocation;
- list.add(option);
- saveLocation(selectedLocation);
+  if (foundLocation !== "" && !isLocationSaved(foundLocation)) {
+    let option = document.createElement("option");
+    option.value = foundLocation;
+    option.text = foundLocation;
+    list.add(option);
+    saveLocation(foundLocation);
+  }
 }
+
+
+function isLocationSaved(location) {
+  let savedLocations = JSON.parse(localStorage.getItem("savedLocations")) || [];
+  return savedLocations.includes(location);
+}
+
 
 function splitStringByComma(string) {
  return string.split(",").map((s) => s.trim());
