@@ -91,3 +91,13 @@ body {
   #date{
     color: #eeeeee
   }
+
+  button:hover {
+    background-color: #df8e00;
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: 16px;
+    outline: none; 
+  }
+  
+
