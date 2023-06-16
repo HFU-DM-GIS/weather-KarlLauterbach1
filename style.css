@@ -99,5 +99,13 @@ body {
     border-radius: 16px;
     outline: none; 
   }
+  #clothing-link-container a {
+    color: rgb(255, 255, 255);
+    text-decoration: underline;
+  }
+  
+  #clothing-link-container a:hover {
+    color: #df8e00;
+  }
   
 
