@@ -157,14 +157,14 @@ function generateClothingLink(weatherCode) {
   } else if (weatherCode === 86) { 
     return"https://www.zalando.de/threadbare-wintermantel-khaki-thc21u017-m11.html";
   } else if (weatherCode === 95) { 
-    return "https://www.zalando.de/aigle-malouine-gummistiefel-jaune-blanc-ai211c01y-202.htmle";
+    return "https://www.zalando.de/weather-report-gummistiefel-black-w0b15l000-q11.html";
   } else if (weatherCode === 96) {
-    return "https://www.zalando.de/aigle-malouine-gummistiefel-jaune-blanc-ai211c01y-202.html";
+    return "https://www.zalando.de/weather-report-gummistiefel-black-w0b15l000-q11.html";
   } else if (weatherCode === 99) { 
-    return "https://www.zalando.de/aigle-malouine-gummistiefel-jaune-blanc-ai211c01y-202.html";
+    return "https://www.zalando.de/weather-report-gummistiefel-black-w0b15l000-q11.html";
     };
 
-  return "https://example.com/default-clothing-link";
+  return "https://www.zalando.de/damen-home/";
 }
 
 function dateBuilder(d) {
