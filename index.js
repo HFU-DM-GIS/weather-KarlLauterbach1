@@ -107,61 +107,61 @@ function generateClothingLink(weatherCode) {
   // Füge hier die Logik hinzu, um den passenden Link basierend auf dem Wettercode zu generieren.
   // Zum Beispiel:
   if (weatherCode === 0) {
-    return "https://www.zalando.de/michael-kors-sonnenbrille-black-1mi51k03c-q11.html";
+    return "https://www.zalando.de/damen/?q=sonnebrille";
   } else if (weatherCode === 1) {
-    return "https://www.zalando.de/the-fated-zimmy-shorts-black-t6z21s00f-q11.html?size=38";
+    return "https://www.zalando.de/damen/?q=shorts";
   } else if (weatherCode === 2 ) {
-    return "https://www.zalando.de/izia-strickjacke-sand-iz021i04t-b11.html";
+    return "hhttps://www.zalando.de/damen/?q=strickjacke";
   } else if (weatherCode === 3) {
-    return "https://www.zalando.de/na-kd-mischung-uebergrosse-kurze-leichte-jacke-light-beige-naa21g07w-b11.html";
+    return "https://www.zalando.de/damen/?q=leichte+jacke";
   } else if (weatherCode === 45) {
-    return"https://www.zalando.de/the-north-face-leichte-jacke-super-sonic-blue-color-th321001r-k11.html";
+    return"https://www.zalando.de/damen/?q=windbreaker";
   } else if (weatherCode === 48) {
-    return "https://www.zalando.de/the-north-face-leichte-jacke-super-sonic-blue-color-th321001r-k11.html";
+    return "https://www.zalando.de/damen/?q=windbreaker";
   } else if (weatherCode === 51) {
-    return "https://www.zalando.de/next-shower-resistant-rain-standard-leichte-jacke-pink-nx321g0kz-j11.html";
+    return "https://www.zalando.de/damen/?q=regenjacke+leicht";
   } else if (weatherCode === 53) {
-    return "https://www.zalando.de/next-shower-resistant-rain-standard-leichte-jacke-pink-nx321g0kz-j11.html";
+    return "https://www.zalando.de/damen/?q=regenjacke+leicht";
   } else if (weatherCode === 55) { 
-    return "https://www.zalando.de/next-shower-resistant-rain-standard-leichte-jacke-pink-nx321g0kz-j11.html";
+    return "https://www.zalando.de/damen/?q=regenjacke+leicht";
   } else if (weatherCode === 56) {
-    return "https://www.zalando.de/weather-report-carlene-stoffhose-black-w0b21u00b-q11.html";
+    return "https://www.zalando.de/damen/?q=regenjacke";
   } else if (weatherCode === 57) { 
-    return"https://www.zalando.de/weather-report-carlene-stoffhose-black-w0b21u00b-q11.html";
+    return"https://www.zalando.de/damen/?q=regenjacke";
   } else if (weatherCode === 61) { 
-    return "https://www.zalando.de/next-shower-resistant-rain-standard-leichte-jacke-pink-nx321g0kz-j11.html";
+    return "https://www.zalando.de/damen/?q=regenjacke+leicht";
   } else if (weatherCode === 63) { 
-    return"https://www.zalando.de/vero-moda-vmmalou-coated-jacket-parka-amber-gold-ve121g15w-e11.html";
+    return"https://www.zalando.de/damen/?q=dicke+regenjacke";
   } else if (weatherCode === 65) { 
-    return"https://www.zalando.de/vero-moda-vmmalou-coated-jacket-parka-amber-gold-ve121g15w-e11.html";
+    return"https://www.zalando.de/damen/?q=dicke+regenjacke";
   } else if (weatherCode === 66) {
-    return"https://www.zalando.de/tatuum-emikia-winterjacke-black-tas21u020-q11.html";
+    return"https://www.zalando.de/damen/?q=winterjacke";
   } else if (weatherCode === 67) {
-    return"https://www.zalando.de/tatuum-emikia-winterjacke-black-tas21u020-q11.html";
+    return"https://www.zalando.de/damen/?q=winterjacke";
   } else if (weatherCode === 71) {
-    return"https://www.zalando.de/dreimaster-eissegler-winterjacke-dunkeloliv-4dr21g0b3-m11.html";
+    return"https://www.zalando.de/damen/?q=schneejacke";
   } else if (weatherCode === 73) { 
-    return "https://www.zalando.de/dreimaster-eissegler-winterjacke-dunkeloliv-4dr21g0b3-m11.html";
+    return "https://www.zalando.de/damen/?q=schneejacke";
   } else if (weatherCode === 75) {
-    return "https://www.zalando.de/dreimaster-eissegler-winterjacke-dunkeloliv-4dr21g0b3-m11.html";
+    return "https://www.zalando.de/damen/?q=schneejacke";
   } else if (weatherCode === 77) {
-    return "https://www.zalando.de/dreimaster-eissegler-winterjacke-dunkeloliv-4dr21g0b3-m11.html";
+    return "https://www.zalando.de/damen/?q=schneejacke";
   } else if (weatherCode === 80) { 
-    return "https://www.zalando.de/karl-lagerfeld-essential-umbrella-schirm-transparent-k4851e01q-a11.html";
+    return "https://www.zalando.de/damen/?q=regenschirm";
   } else if (weatherCode === 81) {
-    return "https://www.zalando.de/karl-lagerfeld-essential-umbrella-schirm-transparent-k4851e01q-a11.html";
+    return "https://www.zalando.de/damen/?q=regenschirm";
   } else if (weatherCode === 82) { 
-    return"https://www.zalando.de/aigle-malouine-gummistiefel-jaune-blanc-ai211c01y-202.html";
+    return"https://www.zalando.de/damen/?q=gummistiefel";
   } else if (weatherCode === 85) { 
-    return "https://www.zalando.de/threadbare-wintermantel-khaki-thc21u017-m11.html";
+    return "https://www.zalando.de/damen/?q=wintermantel";
   } else if (weatherCode === 86) { 
-    return"https://www.zalando.de/threadbare-wintermantel-khaki-thc21u017-m11.html";
+    return"https://www.zalando.de/damen/?q=wintermantel";
   } else if (weatherCode === 95) { 
-    return "https://www.zalando.de/weather-report-gummistiefel-black-w0b15l000-q11.html";
+    return "https://www.zalando.de/damen/?q=gummistiefel";
   } else if (weatherCode === 96) {
-    return "https://www.zalando.de/weather-report-gummistiefel-black-w0b15l000-q11.html";
+    return "https://www.zalando.de/damen/?q=gummistiefel";
   } else if (weatherCode === 99) { 
-    return "https://www.zalando.de/weather-report-gummistiefel-black-w0b15l000-q11.html";
+    return "https://www.zalando.de/damen/?q=gummistiefel";
     };
 
   return "https://www.zalando.de/damen-home/";
