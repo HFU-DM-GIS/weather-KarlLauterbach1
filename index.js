@@ -73,7 +73,7 @@ function getCoordinates(query) {
       foundCountry = subLocationStrings[subLocationStrings.length - 1];
       console.log(data);
       getResultsOM(coordinates);
-      saveLocation(query); // Speichern Sie den ausgewählten Ort im Local Storage
+
     })
     .catch((error) => {
       console.error("There was a problem fetching GPS coordinates:", error);
@@ -94,6 +94,77 @@ function displayResults(weather) {
 
   let weather_el = document.querySelector(".current .weather");
   weather_el.innerText = interpretWeatherCode(weather.current_weather.weathercode);
+
+  displayClothes(weather.current_weather.weathercode);
+}
+function displayClothes(weatherCode) {
+  let clothingLink = generateClothingLink(weatherCode);
+  let clothingLinkContainer = document.getElementById("clothing-link-container");
+  clothingLinkContainer.innerHTML = `<a href="${clothingLink}" target="_blank"> Passendes Kleidungsstück ansehen</a>`;
+}
+
+function generateClothingLink(weatherCode) {
+  // Füge hier die Logik hinzu, um den passenden Link basierend auf dem Wettercode zu generieren.
+  // Zum Beispiel:
+  if (weatherCode === 0) {
+    return "https://www.zalando.de/damen/?q=sonnebrille";
+  } else if (weatherCode === 1) {
+    return "https://www.zalando.de/damen/?q=shorts";
+  } else if (weatherCode === 2 ) {
+    return "hhttps://www.zalando.de/damen/?q=strickjacke";
+  } else if (weatherCode === 3) {
+    return "https://www.zalando.de/damen/?q=leichte+jacke";
+  } else if (weatherCode === 45) {
+    return"https://www.zalando.de/damen/?q=windbreaker";
+  } else if (weatherCode === 48) {
+    return "https://www.zalando.de/damen/?q=windbreaker";
+  } else if (weatherCode === 51) {
+    return "https://www.zalando.de/damen/?q=regenjacke+leicht";
+  } else if (weatherCode === 53) {
+    return "https://www.zalando.de/damen/?q=regenjacke+leicht";
+  } else if (weatherCode === 55) { 
+    return "https://www.zalando.de/damen/?q=regenjacke+leicht";
+  } else if (weatherCode === 56) {
+    return "https://www.zalando.de/damen/?q=regenjacke";
+  } else if (weatherCode === 57) { 
+    return"https://www.zalando.de/damen/?q=regenjacke";
+  } else if (weatherCode === 61) { 
+    return "https://www.zalando.de/damen/?q=regenjacke+leicht";
+  } else if (weatherCode === 63) { 
+    return"https://www.zalando.de/damen/?q=dicke+regenjacke";
+  } else if (weatherCode === 65) { 
+    return"https://www.zalando.de/damen/?q=dicke+regenjacke";
+  } else if (weatherCode === 66) {
+    return"https://www.zalando.de/damen/?q=winterjacke";
+  } else if (weatherCode === 67) {
+    return"https://www.zalando.de/damen/?q=winterjacke";
+  } else if (weatherCode === 71) {
+    return"https://www.zalando.de/damen/?q=schneejacke";
+  } else if (weatherCode === 73) { 
+    return "https://www.zalando.de/damen/?q=schneejacke";
+  } else if (weatherCode === 75) {
+    return "https://www.zalando.de/damen/?q=schneejacke";
+  } else if (weatherCode === 77) {
+    return "https://www.zalando.de/damen/?q=schneejacke";
+  } else if (weatherCode === 80) { 
+    return "https://www.zalando.de/damen/?q=regenschirm";
+  } else if (weatherCode === 81) {
+    return "https://www.zalando.de/damen/?q=regenschirm";
+  } else if (weatherCode === 82) { 
+    return"https://www.zalando.de/damen/?q=gummistiefel";
+  } else if (weatherCode === 85) { 
+    return "https://www.zalando.de/damen/?q=wintermantel";
+  } else if (weatherCode === 86) { 
+    return"https://www.zalando.de/damen/?q=wintermantel";
+  } else if (weatherCode === 95) { 
+    return "https://www.zalando.de/damen/?q=gummistiefel";
+  } else if (weatherCode === 96) {
+    return "https://www.zalando.de/damen/?q=gummistiefel";
+  } else if (weatherCode === 99) { 
+    return "https://www.zalando.de/damen/?q=gummistiefel";
+    };
+
+  return "https://www.zalando.de/damen-home/";
 }
 
 function dateBuilder(d) {
@@ -121,7 +192,7 @@ function dateBuilder(d) {
  
   function interpretWeatherCode(code) { 
     const weatherCodes = {
-      0: "☀️ Clear",
+      0: "☀️ Clear", 
       1: "🌤️ Mainly clear",
       2: "⛅ Partly cloudy",
       3: "☁️ Overcast",
@@ -158,6 +229,7 @@ function dateBuilder(d) {
   } else {
     return interpretation; //Falls Interpretation gefunden worden ist, wird diese zurückgegeben 
   }
+  
 }
 
 function saveLocation(location) {
@@ -170,20 +242,29 @@ function loadSavedLocations() {
  let savedLocations = JSON.parse(localStorage.getItem("savedLocations")) || [];
  savedLocations.forEach((location) => {
    let option = document.createElement("option");
-   option.value = location;
+   option.value = location
+
    option.text = location;
    list.add(option);
  });
 }
 
 function saveList() {
- let selectedLocation = searchbox.value;
- let option = document.createElement("option");
- option.value = selectedLocation;
- option.text = selectedLocation;
- list.add(option);
- saveLocation(selectedLocation);
+  if (foundLocation !== "" && !isLocationSaved(foundLocation)) {
+    let option = document.createElement("option");
+    option.value = foundLocation;
+    option.text = foundLocation;
+    list.add(option);
+    saveLocation(foundLocation);
+  }
 }
+
+
+function isLocationSaved(location) {
+  let savedLocations = JSON.parse(localStorage.getItem("savedLocations")) || [];
+  return savedLocations.includes(location);
+}
+
 
 function splitStringByComma(string) {
  return string.split(",").map((s) => s.trim());
@@ -191,7 +272,7 @@ function splitStringByComma(string) {
 
 function deleteLocation() {
   let selectedLocation = list.value;
-  if (selectedLocation !== "Select a saved city") {
+  if (selectedLocation !== "Search for a city") {
     let savedLocations = JSON.parse(localStorage.getItem("savedLocations"));
     let index = savedLocations.indexOf(selectedLocation);
     if (index !== -1) {
